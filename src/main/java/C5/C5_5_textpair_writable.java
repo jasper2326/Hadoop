@@ -3,19 +3,19 @@ package C5;
 import java.io.*;
 import org.apache.hadoop.io.*;
 
-public class C_5_5_2_textpair_writable implements WritableComparable<C_5_5_2_textpair_writable> {
+public class C5_5_textpair_writable implements WritableComparable<C5_5_textpair_writable> {
     private Text first;
     private Text second;
 
-    public C_5_5_2_textpair_writable() {
+    public C5_5_textpair_writable() {
         set(new Text(), new Text());
     }
 
-    public C_5_5_2_textpair_writable(String first, String second) {
+    public C5_5_textpair_writable(String first, String second) {
         set(new Text(first), new Text(second));
     }
 
-    public C_5_5_2_textpair_writable(Text first, Text second) {
+    public C5_5_textpair_writable(Text first, Text second) {
         set(first, second);
     }
 
@@ -32,7 +32,7 @@ public class C_5_5_2_textpair_writable implements WritableComparable<C_5_5_2_tex
          return second;
     }
 
-    public int compareTo(C_5_5_2_textpair_writable o) {
+    public int compareTo(C5_5_textpair_writable o) {
         int cmp = first.compareTo(o.first);
 
         if (cmp != 0) {
@@ -60,8 +60,8 @@ public class C_5_5_2_textpair_writable implements WritableComparable<C_5_5_2_tex
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof C_5_5_2_textpair_writable) {
-            C_5_5_2_textpair_writable tp = (C_5_5_2_textpair_writable)o;
+        if (o instanceof C5_5_textpair_writable) {
+            C5_5_textpair_writable tp = (C5_5_textpair_writable)o;
             return first.equals(tp.first) && second.equals(tp.second);
         }
         return false;
