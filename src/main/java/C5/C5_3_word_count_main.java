@@ -11,7 +11,7 @@ import org.apache.hadoop.mapreduce.lib.reduce.IntSumReducer;
 
 import java.io.IOException;
 
-public class C5_1_word_count_main {
+public class C5_3_word_count_main {
     public static void main(String[] args) throws IOException,
             ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
@@ -22,9 +22,9 @@ public class C5_1_word_count_main {
         }
 
         Job job = new Job(conf, "wordCount");
-        job.setJarByClass(C5_1_word_count_main.class);
+        job.setJarByClass(C5_3_word_count_main.class);
         job.setMapperClass(C5_1_word_count_mapper.class);
-        job.setReducerClass(C5_1_word_count_reducer.class);
+        job.setReducerClass(C5_2_word_count_reducer.class);
         job.setReducerClass(IntSumReducer.class);
 
         job.setOutputKeyClass(Text.class);
