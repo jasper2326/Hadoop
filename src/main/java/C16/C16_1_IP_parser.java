@@ -6,8 +6,8 @@ public class C16_1_IP_parser {
     private String DBPath = "qqwry.dat";
     private String Country, LocalStr;
     private Long IPN;
-    private int RecordCount, CountryFlag;
-    private Long RangE, RangB, OffSet, StartIP, EndIP, FirstStartIP, LastStartIP, EndIPOff;
+    private int RecordCount, CountryFlag, RangE, RangB;
+    private Long OffSet, StartIP, EndIP, FirstStartIP, LastStartIP, EndIPOff;
 
     private RandomAccessFile fis;
     private byte[] buff;
@@ -44,5 +44,29 @@ public class C16_1_IP_parser {
         this.IPN = ipStrToInt(ip);
         fis = new RandomAccessFile(this.DBPath, "r");
         buff = new byte[4];
+        fis.seek(0);
+        fis.read(buff);
+        FirstStartIP = this.ByteArrayToLong(buff);
+        fis.read(buff);
+        LastStartIP = this.ByteArrayToLong(buff);
+        RecordCount = (int)((LastStartIP - FirstStartIP) / 7);
+
+        if (RecordCount <= 1) {
+            LocalStr = Country = "Unknown";
+            throw new Exception();
+        }
+
+        RangB = 0;
+        RangE = RecordCount;
+        long RecNo;
+
+        do {
+            RecNo = (RangB + RangE) / 2;
+            getStartIP(RecNo);
+            if (IPN == StartIP) {
+                RangB = RecNo;
+                break;
+            }
+        }
     }
 }
